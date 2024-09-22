@@ -95,6 +95,10 @@ function getLearnerData(course, ag, submissions) {
     console.log(error);
   }
 
+  // Error handling
+  // 1. possible points being 0
+  // 3. etc
+
   // AssignmentGroup Data
   //Assignments due
   const deliverables = ag.assignments.filter(function (deliverable) {
@@ -198,11 +202,6 @@ function getLearnerData(course, ag, submissions) {
     console.log(students);
   }
 
-  // Error handling
-  // 1. possible points being 0
-  // 2. assignment group not matching course id
-  // 3. etc
-
   //   const result = [
   //     {
   //       id: 125,
@@ -225,7 +224,7 @@ const result = getLearnerData(CourseInfo, AssignmentGroup, LearnerSubmissions);
 
 console.log(result);
 
-// Math operations
+// Math functions
 // 1. avg grade for all assignments submitted per student
 function calcGradeAvg(learnerPoints, agPoints) {
   let avg = learnerPoints / agPoints;
