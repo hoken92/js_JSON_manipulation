@@ -185,7 +185,7 @@ function getLearnerData(course, ag, submissions) {
     }
 
     if (assignmentsTurnedIn === deliverables.length) {
-      // if assignment count matches to amount of assignments due, it'll calculate the avg and log the id, avg.
+      // if assignment count matches to amount of assignments due, it'll calculate the avg and log the id, total avg and assignment averages.
       students.id = learner;
       students[deliverables[0].id] = totalScoreAgOne.toFixed(2);
       students[deliverables[1].id] = totalScoreAgTwo.toFixed(2);
@@ -193,10 +193,11 @@ function getLearnerData(course, ag, submissions) {
       learnerResults.push(students);
     }
 
-    // console.log(learner, totalScore);
-    // console.log(assignmentsTurnedIn);
-    // console.log(students);
+    console.log(learner, totalScore);
+    console.log(assignmentsTurnedIn);
+    console.log(students);
   }
+
   // Error handling
   // 1. possible points being 0
   // 2. assignment group not matching course id
