@@ -95,11 +95,6 @@ function getLearnerData(course, ag, submissions) {
     console.log(error);
   }
 
-  // Error handling
-  // 1. possible points being 0
-  // 3. etc
-
-  // AssignmentGroup Data
   //Assignments due
   const deliverables = ag.assignments.filter(function (deliverable) {
     if (deliverable.due_at < "2024-09-20") {
@@ -139,6 +134,15 @@ function getLearnerData(course, ag, submissions) {
     let possibleScore = 0;
     let newAssignmentTurnedIn = false;
 
+    // Checks if Learner id is 0 or empty
+    try {
+      if (!submissions[i].learner_id) {
+        throw Error(`Submission's Learner ID cannot be empty or 0`);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+
     if (submissions[i].learner_id != learner) {
       learner = submissions[i].learner_id;
       totalScoreAgOne = 0;
@@ -150,6 +154,18 @@ function getLearnerData(course, ag, submissions) {
 
     // Iterating through assignment ids to match with student submissions and check if the assignments are late.
     for (j = 0; j < deliverables.length; j++) {
+      // Checking if assignments have a possible score of 0
+      try {
+        if (deliverables[j].points_possible === 0) {
+          throw Error(
+            `Assignment's cannot have a score of 0. Assignment ID: ${deliverables[j].id} points display: ${deliverables[j].points_possible} points.`
+          );
+        }
+      } catch (error) {
+        console.log(error);
+      }
+
+      // If assignments id matches with learner's submission id, it will add the score to two variables. One for total avg and one for each assignment average
       if (deliverables[j].id === submissions[i].assignment_id) {
         totalScore += checkLateAssignment(
           deliverables[j].due_at,
@@ -169,6 +185,7 @@ function getLearnerData(course, ag, submissions) {
         assignmentsTurnedIn++;
         newAssignmentTurnedIn = true;
 
+        // If an assignment is turned in is true, it will log the assignment score avg to the correct variable
         if (newAssignmentTurnedIn) {
           switch (assignmentsTurnedIn) {
             case 1:
