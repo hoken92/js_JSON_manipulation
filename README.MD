@@ -7,57 +7,32 @@ Don't forget to give this project a star for additional support ;)
 Maybe you can mention me or this repo in the acknowledgements too
 -->
 <div align="center">
-
-  <img src="assets/logo.png" alt="logo" width="200" height="auto" />
   <h1>Data manipulation with Javascript</h1>
-  
   <p>
-    This file takes array object data and will return a specific format. Please read down further to learn more! 
+    This file takes an array object data and will return a specific format. Please read down further to learn more! 
   </p>
-  
-  
-<!-- Badges -->
-<p>
-  <a href="https://github.com/hoken92/js_JSON_manipulation/graphs/contributors">
-    <img src="https://img.shields.io/github/contributors/hoken92/js_JSON_manipulation/graphs/contributors" alt="contributors" />
-  </a>
-  <a href="">
-    <img src="https://github.com/hoken92/js_JSON_manipulation/graphs/commit-activity" alt="last update" />
-  </a>
-</p>
-   
 </div>
 
 # My Awesome Project
 
-Write a short sentence or two about this project and what it does. Be sure to include a link and a screenshot (we're front end devs so we can actually see our work!).
+In this project, I use Javascript to handle and manipulate data nested inside an array object. It will take certain formatted data and return the student id, total avg and avg for school assignments.
 
-**Link to project:** http://recruiters-love-seeing-live-demos.com/
-
-![alt tag](http://placecorgi.com/1200/650)
+**Link to project:** https://github.com/hoken92/js_JSON_manipulation
 
 ## How It's Made:
 
-**Tech used:** HTML, CSS, JavaScript, Framework of choice
+This project's data is in the form of three array objects. Each array object has multiple key, value pairs to be read and digested with Javascript. The getLearnerData function processes all the learner submissions against the school assignment's data. # It will first compare all assignment course ids to the course id. # Next, it will filter out assignments that are currently due and ones that are not due. # After, I used a for loop to iterate through the learner's assignments with a .length to count how many iterations. # The loop will set the learner's ID if the current iteration ID does not match, along with resetting a couple of score variables. # There is another for loop nested inside that will iterate through the due assignments and if an assignment id matches with the submission id. It will check if the assignment is late and will then calculate the avg score + adding the scores to variables. # When the assignment count turn in reaches the length of the assignments due, it will then create key, value pairs to the object and push the object into the array.
 
-Here's where you can go to town on how you actually built this thing. Write as much as you can here, it's totally fine if it's not too much just make sure you write _something_. If you don't have too much experience on your resume working on the front end that's totally fine. This is where you can really show off your passion and make up for that ten fold.
+**Tech used:** JavaScript
 
 ## Optimizations
 
-_(optional)_
-
-You don't have to include this section but interviewers _love_ that you can not only deliver a final product that looks great but also functions efficiently. Did you write something then refactor it later and the result was 5x faster than the original implementation? Did you cache your assets? Things that you write in this section are **GREAT** to bring up in interviews and you can use this section as reference when studying for technical interviews!
+In the future, I would like to optimize the amount of if statements inside the for loop. I feel like I have to many that tries to filter out some of the data and manipulate the data when it is true. I just wasn't sure how to fully utilize the object.map method. I would like to learn how I can better apply it.
 
 ## Lessons Learned:
 
 No matter what your experience level, being an engineer means continuously learning. Every time you build something you always have those _whoa this is awesome_ or _wow I actually did it!_ moments. This is where you should share those moments! Recruiters and interviewers love to see that you're self-aware and passionate about growing.
 
-## Examples:
+## Contributors:
 
-Take a look at these couple examples that I have in my own portfolio:
-
-**Palettable:** https://github.com/alecortega/palettable
-
-**Twitter Battle:** https://github.com/alecortega/twitter-battle
-
-**Patch Panel:** https://github.com/alecortega/patch-panel
+- Kenneth Ho
