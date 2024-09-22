@@ -78,46 +78,129 @@ const LearnerSubmissions = [
 
 function getLearnerData(course, ag, submissions) {
   // here, we would process this data to achieve the desired result.
+  const learnerResults = [];
 
   // Course data
   // 1. capture the courseInfo ID in variable
+  const courseInfoID = course.id;
 
-  // assignmentGroup Data
+  // AssignmentGroup Data
   // 1. log course id(number)
   // 1. individual assignment
   // 2. log id(number), due dates(string),points(number)
+  const deliverables = ag.assignments.filter(function (deliverable) {
+    if (deliverable.due_at < "2024-09-20") {
+      return true;
+    }
+  });
 
-  //learner data
+  const deliverableNotDue = ag.assignments.filter(function (deliverable) {
+    if (deliverable.due_at > "2024-09-20") {
+      return true;
+    }
+  });
+
+  //Learner dataq
   // 1. log id(number), assignment id, submission(date, score)
 
-  // math operations
-  // 1. avg grade for all assignments submitted per student
-  // 2. date calcution for assignment not due or late
-  // 3. deduct 10% from total grade if late
+  let learner = 0;
+  let totalScore = 0;
+  let possibleScore = 0;
+  let assignmentsTurnedIn = 0;
 
-  // error handling
+  // Iterating through student assignment submissions
+  for (i = 0; i < submissions.length; i++) {
+    let students = {};
+
+    if (submissions[i].learner_id === learner) {
+    } else {
+      learner = submissions[i].learner_id;
+      totalScore = 0;
+      possibleScore = 0;
+      assignmentsTurnedIn = 0;
+    }
+
+    // Iterating through assignment ids to match with student submissions and check if the assignments are late.
+    for (j = 0; j < deliverables.length; j++) {
+      if (deliverables[j].id === submissions[i].assignment_id) {
+        totalScore += checkLateAssignment(
+          deliverables[j].due_at,
+          deliverables[j].points_possible,
+          submissions[i].submission.submitted_at,
+          submissions[i].submission.score
+        );
+        possibleScore += deliverables[j].points_possible;
+        assignmentsTurnedIn++;
+      }
+    }
+
+    if (submissions[i].assignment_id === deliverableNotDue[0].id) {
+      continue;
+    }
+
+    if (assignmentsTurnedIn === deliverables.length) {
+      students.id = learner;
+      students.avg = calcGradeAvg(totalScore, possibleScore);
+      learnerResults.push(students);
+    }
+    console.log(learner, totalScore);
+    console.log(possibleScore);
+    console.log(assignmentsTurnedIn);
+  }
+
+  //   console.log(students);
+
+  // Math operations
+  // 1. avg grade for all assignments submitted per student
+  function calcGradeAvg(learnerPoints, agPoints) {
+    let avg = learnerPoints / agPoints;
+    return avg;
+  }
+
+  // 2. date calcution for assignment not due or late, deduct 10% from score
+  function checkLateAssignment(dueDate, agPoints, subDate, score) {
+    let lateGrade;
+    if (subDate > dueDate) {
+      let deductAmount = agPoints * 0.1;
+      return (lateGrade = score - deductAmount);
+    } else {
+      return score;
+    }
+  }
+
+  // Error handling
   // 1. possible points being 0
   // 2. assignment group not matching course id
   // 3. etc
 
-  const result = [
-    {
-      id: 125,
-      avg: 0.985, // (47 + 150) / (50 + 150)
-      1: 0.94, // 47 / 50
-      2: 1.0, // 150 / 150
-    },
-    {
-      id: 132,
-      avg: 0.82, // (39 + 125) / (50 + 150)
-      1: 0.78, // 39 / 50
-      2: 0.833, // late: (140 - 15) / 150
-    },
-  ];
-
-  return result;
+  //   const result = [
+  //     {
+  //       id: 125,
+  //       avg: 0.985, // (47 + 150) / (50 + 150)
+  //       1: 0.94, // 47 / 50
+  //       2: 1.0, // 150 / 150
+  //     },
+  //     {
+  //       id: 132,
+  //       avg: 0.82, // (39 + 125) / (50 + 150)
+  //       1: 0.78, // 39 / 50
+  //       2: 0.833, // late: (140 - 15) / 150
+  //     },
+  //   ];
+  return learnerResults;
 }
 
 const result = getLearnerData(CourseInfo, AssignmentGroup, LearnerSubmissions);
 
 console.log(result);
+
+// loops and objects
+// array methods - map/reduce/filter
+
+// let studentDeliverables = LearnerSubmissions.map(function (studentGrades) {
+//     if (students){
+//         students[]
+//     } else {
+//         if ( )
+//     }
+//   });
