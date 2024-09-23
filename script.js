@@ -113,7 +113,7 @@ function getLearnerData(course, ag, submissions) {
   // 1. log id(number), assignment id, submission(date, score)
   let learner = 0;
 
-  // tracks each Learner assignment score
+  // tracks Learner each assignment score
   let totalScoreAgOne = 0;
   let totalScoreAgTwo = 0;
 
