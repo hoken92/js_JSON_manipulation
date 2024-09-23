@@ -213,12 +213,11 @@ function getLearnerData(course, ag, submissions) {
       students.avg = calcGradeAvg(totalScore, totalPossibleScore);
       learnerResults.push(students);
     }
-
-    console.log(learner, totalScore);
-    console.log(assignmentsTurnedIn);
-    console.log(students);
   }
 
+  console.log(`This is the data returned from Course number ${courseInfoID}. The total amount of assignments that were due are ${deliverables.length} assignments. Their due dates were Assignment ${deliverables[0].id}: ${deliverables[0].due_at} and Assignment ${deliverables[1].id}: ${deliverables[1].due_at}.
+  
+  Below are the total learners and their avg grades for each and total assignments.`);
   return learnerResults;
 }
 
